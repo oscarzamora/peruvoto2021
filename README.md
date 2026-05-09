@@ -91,7 +91,43 @@ El dashboard presenta 3 páginas principales:
 
 ## Contenido del proyecto
 
-El proyecto contiene archivos fuente en formato CSV, el dashboard en Power BI, y documentación de soporte para la configuración y uso.
+El proyecto contiene archivos fuente en formato CSV y el dashboard en Power BI.
+
+## Configuración de ruta relativa en Power BI
+
+Power BI Desktop no toma automáticamente la ubicación del archivo PBIX para resolver rutas relativas reales. Para lograr el mismo efecto, se utiliza un parámetro de carpeta base.
+
+En este proyecto, esa configuración ya está preconfigurada en el archivo PBIX. La explicación de abajo se mantiene como documentación de referencia en caso se requiera actualizar, migrar o ajustar rutas en otro entorno.
+
+Pasos recomendados:
+
+1. En Power BI Desktop, abrir **Transformar datos**.
+2. Ir a **Administrar parámetros** y crear el parámetro `BaseProjectPath` (tipo texto).
+3. Asignar como valor la carpeta raíz del proyecto.
+4. En cada consulta CSV, construir la ruta completa combinando el parámetro con el nombre del archivo.
+
+Ejemplo en Power Query (M):
+
+```powerquery
+let
+    FilePath = BaseProjectPath & "\data\Resultados_1ra_vuelta_Version_PCM.csv",
+    Source = Csv.Document(
+        File.Contents(FilePath),
+        [Delimiter=";", Columns=32, Encoding=1252, QuoteStyle=QuoteStyle.None]
+    )
+in
+    Source
+```
+
+Con este enfoque, si el proyecto cambia de carpeta o de equipo, solo se actualiza `BaseProjectPath` y no todas las consultas.
+
+## Resumen de lo realizado en este repositorio
+
+1. Se organizó la estructura final dejando los datos en `data/` y el archivo Power BI en `reports/ONPE.pbix`.
+2. Se documentó el contexto histórico de la elección presidencial 2021 (primera y segunda vuelta).
+3. Se incorporaron fuentes oficiales: artículo original y portal de Datos Abiertos (ONPE).
+4. Se añadieron ejemplos técnicos en DAX (atributos derivados y medida de porcentaje).
+5. Se corrigió ortografía y tildación del contenido en español.
 
 ## Aprendizajes (adaptado del artículo original)
 
@@ -104,5 +140,5 @@ El proyecto contiene archivos fuente en formato CSV, el dashboard en Power BI, y
 ## Próximo paso
 
 1. Abrir el archivo Power BI en Power BI Desktop.
-2. Seguir la guía de configuración de rutas relativas en la documentación.
+2. Validar el parámetro `BaseProjectPath` para lectura de archivos CSV (ya preconfigurado; actualizar solo si cambia la ubicación del proyecto).
 3. Ejecutar refresco de datos, revisar relaciones y extender visualizaciones según necesidad.

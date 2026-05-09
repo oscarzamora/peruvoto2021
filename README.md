@@ -1,16 +1,18 @@
 # Proyecto Power BI - Elecciones Presidenciales Perú 2021
 
+## Índice
+
+- [Propósito y Contexto](#propósito-y-contexto)
+- [Datos disponibles](#datos-disponibles)
+- [Origen de la data](#origen-de-la-data-fuente-oficial)
+- [Contenido del reporte](#contenido-del-reporte)
+- [Galería de Paneles](#galería-de-paneles)
+
 ## Descripción
 
 Este repositorio documenta un ejercicio de análisis de datos desarrollado en 2021 con Power BI, utilizando información pública de la ONPE para la primera y segunda vuelta de las elecciones presidenciales del Perú.
 
-Fuente y referencia original del ejercicio:
-- https://ozamora.com/2021/07/peruvian-voting-data-with-powerbi/
-
-Fuente oficial de datos abiertos (ONPE):
-- https://www.datosabiertos.gob.pe/group/oficina-nacional-de-procesos-electorales-onpe
-
-## Contexto
+## Propósito y Contexto
 
 El ejercicio se desarrolló en un escenario electoral de alta sensibilidad pública. En 2021, Perú realizó sus elecciones presidenciales en dos vueltas:
 
@@ -21,6 +23,19 @@ El ejercicio se desarrolló en un escenario electoral de alta sensibilidad públ
 En ese momento, la ONPE publicó los datasets de votación de ambas vueltas, lo que permitió contrastar resultados y reducir espacios para desinformación mediante evidencia verificable. Los datos desagregados por mesa de votación facilitaban análisis independientes y verificación de los resultados reportados.
 
 Los archivos utilizados en este proyecto se obtienen del portal de Datos Abiertos del Estado peruano, específicamente del grupo oficial de la ONPE.
+
+## Datos disponibles
+
+- `Resultados_1ra_vuelta_Version_PCM.csv` (primera vuelta)
+- `Resultados_2da_vuelta_Version_PCM.csv` (segunda vuelta)
+- `reports/ONPE.pbix` (reporte Power BI)
+
+## Origen de la data (fuente oficial)
+
+- Portal de datos abiertos ONPE:
+    - https://www.datosabiertos.gob.pe/group/oficina-nacional-de-procesos-electorales-onpe
+- Referencia original del ejercicio:
+    - https://ozamora.com/2021/07/peruvian-voting-data-with-powerbi/
 
 ## Propósito del proyecto
 
@@ -83,11 +98,19 @@ Ratio_K =
 
 ### Componentes del Dashboard
 
+## Contenido del reporte
+
 El dashboard presenta 3 páginas principales:
 
 1. **Presidenciales** - Información de votos para Keiko Fujimori y Pedro Castillo en ambas vueltas, con opciones de filtro y drill-down por mesa de votación.
 2. **Nulos, Blancos** - Información de votos sin candidato o invalidados por error.
 3. **Menos de 5 Votos** - Ubicaciones que registraron menos de 5 votos por candidato principal.
+
+## Galería de Paneles
+
+- Presidenciales
+- Nulos, Blancos
+- Menos de 5 Votos
 
 ## Contenido del proyecto
 

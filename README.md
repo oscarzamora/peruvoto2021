@@ -1,8 +1,8 @@
-# Proyecto Power BI - Elecciones Presidenciales Peru 2021
+# Proyecto Power BI - Elecciones Presidenciales Perú 2021
 
-## Descripcion
+## Descripción
 
-Este repositorio documenta un ejercicio de analisis de datos desarrollado en 2021 con Power BI, utilizando informacion publica de la ONPE para la primera y segunda vuelta de las elecciones presidenciales del Peru.
+Este repositorio documenta un ejercicio de análisis de datos desarrollado en 2021 con Power BI, utilizando información pública de la ONPE para la primera y segunda vuelta de las elecciones presidenciales del Perú.
 
 Fuente y referencia original del ejercicio:
 - https://ozamora.com/2021/07/peruvian-voting-data-with-powerbi/
@@ -12,30 +12,30 @@ Fuente oficial de datos abiertos (ONPE):
 
 ## Contexto
 
-El ejercicio se desarrollo en un escenario electoral de alta sensibilidad publica. En 2021, Peru realizo sus elecciones presidenciales en dos vueltas:
+El ejercicio se desarrolló en un escenario electoral de alta sensibilidad pública. En 2021, Perú realizó sus elecciones presidenciales en dos vueltas:
 
-**Primera Vuelta (11 de abril de 2021):** En una eleccion altamente fragmentada con 18 candidatos, Pedro Castillo (izquierda radical) obtuvo el primer lugar con aproximadamente 19% de los votos, seguido de Keiko Fujimori (derecha) con cerca de 13%. Ambos avanzaron a la segunda vuelta, lo cual sorprendio a muchos analistas dado el contexto politico y economico del pais.
+**Primera Vuelta (11 de abril de 2021):** En una elección altamente fragmentada con 18 candidatos, Pedro Castillo (izquierda radical) obtuvo el primer lugar con aproximadamente 19% de los votos, seguido de Keiko Fujimori (derecha) con cerca de 13%. Ambos avanzaron a la segunda vuelta, lo cual sorprendió a muchos analistas dado el contexto político y económico del país.
 
-**Segunda Vuelta (6 de junio de 2021):** En el ballotage final, Pedro Castillo resulto ganador con aproximadamente 50.1% de los votos frente a Keiko Fujimori con 49.9%. El resultado fue sumamente cerrado y controversial, lo que genero alegaciones de fraude por parte de sectores que respaldaban a Fujimori, aunque no se presento evidencia tangible de irregularidades sistematicas.
+**Segunda Vuelta (6 de junio de 2021):** En el ballotage final, Pedro Castillo resultó ganador con aproximadamente 50.1% de los votos frente a Keiko Fujimori con 49.9%. El resultado fue sumamente cerrado y controversial, lo que generó alegaciones de fraude por parte de sectores que respaldaban a Fujimori, aunque no se presentó evidencia tangible de irregularidades sistemáticas.
 
-En ese momento, la ONPE publico los datasets de votacion de ambas vueltas, lo que permitio contrastar resultados y reducir espacios para desinformacion mediante evidencia verificable. Los datos desagregados por mesa de votacion facilitaban analisis independientes y verificacion de los resultados reportados.
+En ese momento, la ONPE publicó los datasets de votación de ambas vueltas, lo que permitió contrastar resultados y reducir espacios para desinformación mediante evidencia verificable. Los datos desagregados por mesa de votación facilitaban análisis independientes y verificación de los resultados reportados.
 
-Los archivos utilizados en este proyecto se obtienen del portal de Datos Abiertos del Estado peruano, especificamente del grupo oficial de la ONPE.
+Los archivos utilizados en este proyecto se obtienen del portal de Datos Abiertos del Estado peruano, específicamente del grupo oficial de la ONPE.
 
-## Proposito del proyecto
+## Propósito del proyecto
 
-1. Exponer con transparencia la informacion oficial publicada por la ONPE, de modo que cualquier persona pudiera explorar y analizar los datos.
-2. Reforzar y retomar practica de desarrollo en Power BI sobre un caso real, incluyendo modelado, jerarquias, medidas y visualizaciones.
+1. Exponer con transparencia la información oficial publicada por la ONPE, de modo que cualquier persona pudiera explorar y analizar los datos.
+2. Reforzar y retomar práctica de desarrollo en Power BI sobre un caso real, incluyendo modelado, jerarquías, medidas y visualizaciones.
 
-## Alcance tecnico del ejercicio
+## Alcance técnico del ejercicio
 
-- Integracion de 2 archivos CSV oficiales (primera y segunda vuelta).
-- Creacion de un modelo de datos con relacion principal por `MESA_DE_VOTACION`.
-- Construccion de atributos derivados para analisis geografico nacional e internacional.
-- Diseno de paginas de analisis para resultados presidenciales, votos nulos/blancos y casos con baja votacion.
-- Implementacion de medidas DAX para calculo de porcentajes dinamicos segun filtros.
+- Integración de 2 archivos CSV oficiales (primera y segunda vuelta).
+- Creación de un modelo de datos con relación principal por `MESA_DE_VOTACION`.
+- Construcción de atributos derivados para análisis geográfico nacional e internacional.
+- Diseño de páginas de análisis para resultados presidenciales, votos nulos/blancos y casos con baja votación.
+- Implementación de medidas DAX para cálculo de porcentajes dinámicos según filtros.
 
-## Ejemplos Tecnicos
+## Ejemplos Técnicos
 
 ### Atributos Derivados (DAX)
 
@@ -49,10 +49,10 @@ Continente =
     "AMERICA")
 ```
 
-**Pais** - Determina el país basado en continente y provincia. Si está fuera de América o el departamento no es el continente, retorna la provincia como país.
+**País** - Determina el país basado en continente y provincia. Si está fuera de América o el departamento no es el continente, retorna la provincia como país.
 
 ```dax
-Pais = 
+País = 
     IF(Resultados_1ra_vuelta_Version_PCM[Continente]="AMERICA"
         && Resultados_1ra_vuelta_Version_PCM[Continente] 
             <> Resultados_1ra_vuelta_Version_PCM[DEPARTAMENTO],
@@ -60,18 +60,18 @@ Pais =
     , Resultados_1ra_vuelta_Version_PCM[PROVINCIA])
 ```
 
-**Departamento Peru** - Normaliza el departamento para votos nacionales, asignando "Exterior" para votos internacionales.
+**Departamento Perú** - Normaliza el departamento para votos nacionales, asignando "Exterior" para votos internacionales.
 
 ```dax
-Departamento Peru = 
-    IF(Resultados_1ra_vuelta_Version_PCM[Pais] = "PERU", 
+Departamento Perú = 
+    IF(Resultados_1ra_vuelta_Version_PCM[País] = "PERU", 
         Resultados_1ra_vuelta_Version_PCM[DEPARTAMENTO], 
         "Exterior")
 ```
 
-### Medidas de Analisis
+### Medidas de Análisis
 
-**Porcentaje de Votos (Ratio)** - Calcula el porcentaje dinamico de votos por candidato segun los filtros aplicados. La funcion CALCULATE es esencial porque permite que el denominador y numerador se recalculen automaticamente segun los cambios en filtros.
+**Porcentaje de Votos (Ratio)** - Calcula el porcentaje dinámico de votos por candidato según los filtros aplicados. La función CALCULATE es esencial porque permite que el denominador y numerador se recalculen automáticamente según los cambios en filtros.
 
 ```dax
 Ratio_K = 
@@ -83,26 +83,26 @@ Ratio_K =
 
 ### Componentes del Dashboard
 
-El dashboard presenta 3 paginas principales:
+El dashboard presenta 3 páginas principales:
 
-1. **Presidenciales** - Informacion de votos para Keiko Fujimori y Pedro Castillo en ambas vueltas, con opciones de filtro y drill-down por mesa de votacion.
-2. **Nulos, Blancos** - Informacion de votos sin candidato o invalidados por error.
+1. **Presidenciales** - Información de votos para Keiko Fujimori y Pedro Castillo en ambas vueltas, con opciones de filtro y drill-down por mesa de votación.
+2. **Nulos, Blancos** - Información de votos sin candidato o invalidados por error.
 3. **Menos de 5 Votos** - Ubicaciones que registraron menos de 5 votos por candidato principal.
 
 ## Contenido del proyecto
 
-El proyecto contiene archivos fuente en formato CSV, el dashboard en Power BI, y documentacion de soporte para la configuracion y uso.
+El proyecto contiene archivos fuente en formato CSV, el dashboard en Power BI, y documentación de soporte para la configuración y uso.
 
-## Aprendizajes (adaptado del articulo original)
+## Aprendizajes (adaptado del artículo original)
 
 1. Un dashboard simple puede generar alto valor cuando se parte de datos oficiales y trazables.
-2. Con dos datasets y una relacion bien definida es posible habilitar comparaciones utiles entre vueltas electorales.
-3. Los atributos calculados (por ejemplo, continente, pais y normalizacion geografica) mejoran la capacidad de segmentacion y el drill-down.
-4. Las medidas DAX permiten calcular indicadores porcentuales dinamicos que se ajustan automaticamente al contexto de filtros.
-5. La transparencia de la fuente y la reproducibilidad del modelo son claves para fomentar analisis abiertos y verificables.
+2. Con dos datasets y una relación bien definida es posible habilitar comparaciones útiles entre vueltas electorales.
+3. Los atributos calculados (por ejemplo, continente, país y normalización geográfica) mejoran la capacidad de segmentación y el drill-down.
+4. Las medidas DAX permiten calcular indicadores porcentuales dinámicos que se ajustan automáticamente al contexto de filtros.
+5. La transparencia de la fuente y la reproducibilidad del modelo son claves para fomentar análisis abiertos y verificables.
 
-## Proximo paso
+## Próximo paso
 
 1. Abrir el archivo Power BI en Power BI Desktop.
-2. Seguir la guia de configuracion de rutas relativas en la documentacion.
-3. Ejecutar refresco de datos, revisar relaciones y extender visualizaciones segun necesidad.
+2. Seguir la guía de configuración de rutas relativas en la documentación.
+3. Ejecutar refresco de datos, revisar relaciones y extender visualizaciones según necesidad.

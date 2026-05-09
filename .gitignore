@@ -1,0 +1,18 @@
+# Power BI temporales
+*.tmp
+*.temp
+*.bak
+
+# Cache local de Power BI Desktop
+*.pbitmp
+*.pbix.autosave
+
+# Logs y artefactos
+*.log
+
+# Python virtual env (si usas scripts)
+.venv/
+venv/
+
+# VS Code
+.vscode/*.code-workspace

@@ -39,7 +39,7 @@ El mapeo entre las columnas `VOTOS_Pn` de los CSV y los partidos / candidatos pr
 Incluye:
 
 - Cabeceras verificadas de los archivos de primera y segunda vuelta.
-- Tabla de mapeo `VOTOS_Pn → partido_id → Partido → Candidato` para ambas vueltas.
+- Tabla de mapeo `VOTOS_Pn → partido_id → Partido → Candidato` para ambas vueltas, con **votos verificados** sumando columna por columna las 86,488 mesas de 1ra vuelta.
 - Descripción del resto de columnas (UBIGEO, MESA_DE_VOTACION, totales de votos en blanco, nulos e impugnados).
 
 ## Origen de la data (fuente oficial)

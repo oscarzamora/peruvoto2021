@@ -4,6 +4,7 @@
 
 - [Propósito y Contexto](#propósito-y-contexto)
 - [Datos disponibles](#datos-disponibles)
+- [Diccionario de partidos y candidatos](#diccionario-de-partidos-y-candidatos)
 - [Origen de la data](#origen-de-la-data-fuente-oficial)
 - [Contenido del reporte](#contenido-del-reporte)
 - [Galería de Paneles](#galería-de-paneles)
@@ -26,9 +27,20 @@ Los archivos utilizados en este proyecto se obtienen del portal de Datos Abierto
 
 ## Datos disponibles
 
-- `Resultados_1ra_vuelta_Version_PCM.csv` (primera vuelta)
-- `Resultados_2da_vuelta_Version_PCM.csv` (segunda vuelta)
+- `data/Resultados_1ra_vuelta_Version_PCM.csv` (primera vuelta)
+- `data/Resultados_2da_vuelta_Version_PCM.csv` (segunda vuelta)
 - `reports/ONPE.pbix` (reporte Power BI)
+- `docs/CSV_PARTIDOS_CANDIDATOS.md` (diccionario de columnas, partidos y candidatos)
+
+## Diccionario de partidos y candidatos
+
+El mapeo entre las columnas `VOTOS_Pn` de los CSV y los partidos / candidatos presidenciales 2021 está documentado en [docs/CSV_PARTIDOS_CANDIDATOS.md](docs/CSV_PARTIDOS_CANDIDATOS.md).
+
+Incluye:
+
+- Cabeceras verificadas de los archivos de primera y segunda vuelta.
+- Tabla de mapeo `VOTOS_Pn → partido_id → Partido → Candidato` para ambas vueltas.
+- Descripción del resto de columnas (UBIGEO, MESA_DE_VOTACION, totales de votos en blanco, nulos e impugnados).
 
 ## Origen de la data (fuente oficial)
 
